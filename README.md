@@ -1,4 +1,4 @@
-# 🕹️ Retro Web Arcade
+# Retro Web Arcade 🕹️
 
 A pixel-perfect, CRT-styled browser arcade built from scratch. This is my very first coding project and GitHub repository! It's built entirely with vanilla HTML, CSS, and JavaScript—no frameworks, just learning the fundamentals.
 
@@ -28,16 +28,12 @@ Instead of just following a tutorial, I wanted to build this to truly understand
 *   Vanilla JavaScript (ES Modules)
 *   CSS Grid & Custom Animations
 
-## 💻 Running Locally
+## To Run Locally
 
 If you want to download and run the code on your own machine, you don't need any complex build tools. 
-
 ```bash
 # Clone this repository
-git clone [https://github.com/i-jsk/retro-web-arcade.git](https://github.com/i-jsk/retro-web-arcade.git)
-
-# Navigate into the project folder
-cd retro-web-arcade
-
-# Open index.html in your browser, or start a local server:
-python3 -m http.server 8080
+git clone https://github.com/i-jsk/Retro-Web-Arcade.git
+cd Retro-Web-Arcade
+# Open index.html in your browser after creating a local server:
+python3 -m http.server 8181
