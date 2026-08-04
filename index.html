@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Web Arcade</title>
+  <meta name="description" content="A pixel-perfect browser arcade — classic games, zero installs." />
+
+  <!-- Google Fonts: pixel display font + monospace body font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/crt.css" />
+  <link rel="stylesheet" href="css/arcade.css" />
+</head>
+<body>
+
+  <!-- The CRT frame wraps EVERYTHING - it's what gives the screen-curvature / scanline / glow illusion -->
+  <div class="crt">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+
+    <!-- Boot sequence overlay, shown first, then fades out -->
+    <div class="boot" id="boot">
+      <p class="boot__line">ARCADE OS v1.0</p>
+      <p class="boot__line">MEMORY CHECK... <span class="boot__ok">OK</span></p>
+      <p class="boot__line">LOADING CARTRIDGES... <span class="boot__ok">OK</span></p>
+      <p class="boot__prompt">PRESS START<span class="boot__cursor">_</span></p>
+    </div>
+
+    <!-- Main arcade content, hidden until boot completes -->
+    <div class="arcade" id="arcade">
+
+      <header class="marquee">
+        <h1 class="marquee__title">RETRO WEB ARCADE</h1>
+        <p class="marquee__subtitle">SELECT YOUR GAME</p>
+      </header>
+
+      <main class="cartridge-grid" id="cartridge-grid">
+        <!-- Snake cartridge -->
+        <a class="cartridge" href="snake.html" data-game="snake">
+          <div class="cartridge__screen">
+            <span class="cartridge__icon" aria-hidden="true">▓</span>
+          </div>
+          <h2 class="cartridge__name">SNAKE</h2>
+          <p class="cartridge__status">READY</p>
+        </a>
+
+        <!-- Future cartridges: locked placeholders to show what's coming -->
+        <div class="cartridge cartridge--locked" aria-disabled="true">
+          <div class="cartridge__screen">
+            <span class="cartridge__icon" aria-hidden="true">?</span>
+          </div>
+          <h2 class="cartridge__name">TETRIS</h2>
+          <p class="cartridge__status">COMING SOON</p>
+        </div>
+
+        <div class="cartridge cartridge--locked" aria-disabled="true">
+          <div class="cartridge__screen">
+            <span class="cartridge__icon" aria-hidden="true">?</span>
+          </div>
+          <h2 class="cartridge__name">BREAKOUT</h2>
+          <p class="cartridge__status">COMING SOON</p>
+        </div>
+      </main>
+
+      <footer class="arcade-footer">
+        <p>· BUILT WITH HTML5 CANVAS · NO FRAMEWORKS ·</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake — Retro Web Arcade</title>
+  <meta name="description" content="Play Snake in your browser — part of Retro Web Arcade." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/crt.css" />
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+  <div class="crt">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+
+    <div class="game-page">
+
+      <header class="game-header">
+        <a class="game-header__back" href="index.html">&larr; ARCADE</a>
+        <h1 class="game-header__title glow-amber">SNAKE</h1>
+      </header>
+
+      <div class="game-hud">
+        <div class="game-hud__stat">
+          SCORE <span id="score" class="glow-cyan">0</span>
+        </div>
+        <div class="game-hud__stat">
+          HIGH <span id="high-score" class="glow-cyan">0</span>
+        </div>
+      </div>
+
+      <div class="game-canvas-wrap">
+        <canvas id="game-canvas" width="400" height="400"></canvas>
+
+        <!-- Overlay shown before first game and after game over -->
+        <div class="game-overlay" id="game-overlay">
+          <p class="game-overlay__message" id="overlay-message">PRESS START</p>
+          <p class="game-overlay__hint">USE ARROW KEYS OR WASD</p>
+          <button class="game-overlay__button" id="start-button">START</button>
+        </div>
+      </div>
+
+      <p class="game-mobile-hint">Best played with a keyboard. Touch controls coming soon.</p>
+
+    </div>
+  </div>
+
+  <script type="module" src="js/games/snake.js"></script>
+</body>
+</html>

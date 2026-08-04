@@ -1,0 +1,96 @@
+/* ============================================
+   CRT MONITOR EFFECT
+   This file ONLY handles the "old television"
+   illusion: scanlines, curved-glass vignette,
+   subtle flicker, and phosphor glow.
+   Keeping it separate means any future page
+   (a new game) gets the CRT look for free by
+   just linking this file.
+   ============================================ */
+
+:root {
+  /* ---- Design tokens (the whole palette lives here) ---- */
+  --color-bg: #0a0e14;
+  --color-bg-raised: #10161f;
+  --color-amber: #ffb000;       /* primary phosphor accent */
+  --color-amber-dim: #7a5600;
+  --color-cyan: #3ec6d9;        /* secondary accent */
+  --color-text: #e8e6df;
+  --color-text-dim: #8a9099;
+  --color-danger: #ff4d4d;
+
+  --font-display: 'Press Start 2P', monospace;
+  --font-body: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+.crt {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center, var(--color-bg-raised) 0%, var(--color-bg) 100%);
+}
+
+/* Scanlines: thin repeating horizontal dark lines, classic CRT texture */
+.crt__scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.25) 2px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* Vignette: darkens edges to fake the curve of old glass screens */
+.crt__vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 51;
+  box-shadow: inset 0 0 12vw rgba(0, 0, 0, 0.75);
+}
+
+/* Flicker: an almost-imperceptible brightness pulse, like an old tube */
+.crt__flicker {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 52;
+  background: rgba(255, 255, 255, 0.015);
+  animation: flicker 6s infinite;
+}
+
+@keyframes flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 0.4; }
+  98% { opacity: 1; }
+}
+
+/* Reusable phosphor glow, used on headings/buttons/etc across all pages */
+.glow-amber {
+  color: var(--color-amber);
+  text-shadow: 0 0 4px var(--color-amber), 0 0 14px rgba(255, 176, 0, 0.5);
+}
+
+.glow-cyan {
+  color: var(--color-cyan);
+  text-shadow: 0 0 4px var(--color-cyan), 0 0 14px rgba(62, 198, 217, 0.5);
+}
+
+/* Respect users who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .crt__flicker {
+    animation: none;
+  }
+}
