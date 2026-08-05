@@ -8,6 +8,7 @@
 import { GameLoop } from '../engine/gameLoop.js';
 import { Input } from '../engine/input.js';
 import { getHighScore, setHighScore } from '../engine/scoreboard.js';
+import { createDPad } from '../engine/dpad.js';
 
 // ---------- Setup ----------
 
@@ -26,6 +27,7 @@ const overlayMessage = document.getElementById('overlay-message');
 const startButton = document.getElementById('start-button');
 
 const input = new Input();
+createDPad(input, document.getElementById('dpad-wrap'));
 
 // ---------- Game state ----------
 // We keep all mutable state in one plain object.

@@ -25,6 +25,7 @@
     <div class="crt__scanlines"></div>
     <div class="crt__vignette"></div>
     <div class="crt__flicker"></div>
+    <div class="crt__grain"></div>
 
     <!-- Boot sequence overlay, shown first, then fades out -->
     <div class="boot" id="boot">
@@ -52,6 +53,15 @@
           <p class="cartridge__status">READY</p>
         </a>
 
+        <!-- Tic-Tac-Toe cartridge -->
+        <a class="cartridge" href="tictactoe.html" data-game="tictactoe">
+          <div class="cartridge__screen">
+            <span class="cartridge__icon" aria-hidden="true">#</span>
+          </div>
+          <h2 class="cartridge__name">TIC-TAC-TOE</h2>
+          <p class="cartridge__status">READY</p>
+        </a>
+
         <!-- Future cartridges: locked placeholders to show what's coming -->
         <div class="cartridge cartridge--locked" aria-disabled="true">
           <div class="cartridge__screen">
@@ -71,7 +81,7 @@
       </main>
 
       <footer class="arcade-footer">
-        <p>· BUILT WITH HTML5 CANVAS · NO FRAMEWORKS ·</p>
+        <p> · BUILT WITH HTML5 CANVAS · NO FRAMEWORKS · </p>
       </footer>
 
     </div>

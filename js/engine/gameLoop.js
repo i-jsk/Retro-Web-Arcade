@@ -58,9 +58,6 @@ export class GameLoop {
   _tick(timestamp) {
     if (!this.isRunning || this.isPaused) return;
 
-    // Delta time in seconds since the last frame.
-    // Using this instead of a fixed step means the game
-    // runs at the same real-world speed on a 60Hz or 144Hz screen.
     const dt = (timestamp - this.lastTimestamp) / 1000;
     this.lastTimestamp = timestamp;
 

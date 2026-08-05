@@ -21,6 +21,16 @@ export class Input {
     return this.keysDown.has(key);
   }
 
+  // Lets on-screen touch buttons pretend to be a keyboard key,
+  // so games never need a separate "touch" code path.
+  simulateKeyDown(key) {
+    this.keysDown.add(key);
+  }
+
+  simulateKeyUp(key) {
+    this.keysDown.delete(key);
+  }
+
   destroy() {
     window.removeEventListener('keydown', this._onKeyDown);
     window.removeEventListener('keyup', this._onKeyUp);

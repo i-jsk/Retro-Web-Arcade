@@ -135,3 +135,44 @@
   color: var(--color-text-dim);
   text-align: center;
 }
+
+/* ---------- On-screen D-pad (touch devices only) ---------- */
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 3.2rem);
+  grid-template-rows: repeat(2, 3.2rem);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  /* touch-action: none stops the browser from trying to scroll/zoom
+     while the user is pressing and holding a direction button */
+  touch-action: none;
+  user-select: none;
+}
+
+.dpad__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--color-amber);
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-amber-dim);
+  border-radius: 6px;
+  transition: background 0.1s ease, transform 0.1s ease;
+}
+
+.dpad__btn--active {
+  background: var(--color-amber-dim);
+  transform: scale(0.92);
+}
+
+.dpad__btn--up    { grid-column: 2; grid-row: 1; }
+.dpad__btn--left  { grid-column: 1; grid-row: 2; }
+.dpad__btn--right { grid-column: 3; grid-row: 2; }
+.dpad__btn--down  { grid-column: 2; grid-row: 2; }
+
+.dpad-wrap {
+  display: flex;
+  justify-content: center;
+}

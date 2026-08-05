@@ -1,0 +1,96 @@
+/* ============================================
+   TIC-TAC-TOE
+   Page-specific styling: mode selector, status
+   line, and the 3x3 board grid. Reuses .game-page,
+   .game-header, .game-hud from game.css.
+   ============================================ */
+
+.ttt-mode-select {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.ttt-mode-btn {
+  padding: 0.6rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  color: var(--color-text-dim);
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-amber-dim);
+  border-radius: 4px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.ttt-mode-btn:hover,
+.ttt-mode-btn:focus-visible {
+  color: var(--color-amber);
+  border-color: var(--color-amber);
+  outline: none;
+}
+
+.ttt-mode-btn--active {
+  color: var(--color-bg);
+  background: var(--color-amber);
+  border-color: var(--color-amber);
+}
+
+.ttt-status {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dim);
+  min-height: 1.2em;
+  text-align: center;
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+}
+
+.ttt-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 8vw, 2.4rem);
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-amber-dim);
+  border-radius: 4px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ttt-cell:not(.ttt-cell--filled):not(.ttt-board--disabled .ttt-cell):hover {
+  border-color: var(--color-amber);
+  cursor: pointer;
+}
+
+.ttt-cell--x {
+  color: var(--color-amber);
+  text-shadow: 0 0 6px var(--color-amber);
+}
+
+.ttt-cell--o {
+  color: var(--color-cyan);
+  text-shadow: 0 0 6px var(--color-cyan);
+}
+
+.ttt-cell--win {
+  background: var(--color-amber-dim);
+}
+
+.ttt-reset {
+  background: transparent;
+  color: var(--color-cyan);
+  border: 2px solid var(--color-cyan);
+  box-shadow: none;
+}
+
+.ttt-reset:hover,
+.ttt-reset:focus-visible {
+  box-shadow: 0 0 16px rgba(62, 198, 217, 0.4);
+}
