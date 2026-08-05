@@ -2,18 +2,32 @@
 
 A pixel-perfect, CRT-styled browser arcade built from scratch. This is my very first coding project and GitHub repository! It's built entirely with vanilla HTML, CSS, and JavaScript—no frameworks, just learning the fundamentals.
 
-**[▶ Play it live](https://i-jsk.github.io/Retro-Web-Arcade/)**
 
-![Status](https://img.shields.io/badge/status-in%20progress-ffb000)
+
+\*\*\[▶ Play it live](#)\*\* <!-- replace with your GitHub Pages URL once deployed -->
+
+
+
+!\[Status](https://img.shields.io/badge/status-in%20progress-ffb000)
 
 ## 👾 What's Inside
 
 | Game | Status |
 |---|---|
-| **Snake** | ✅ Playable |
-| **Tic-Tac-Toe** | ✅ Playable |
-| **Tetris** | 🔒 Planned |
-| **Breakout**| 🔒 Planned |
+
+| \*\*Snake\*\* | ✅ Playable |
+
+| \*\*Tic-Tac-Toe\*\*| 🔒 Planned |
+
+| \*\*Tetris\*\* | 🔒 Planned |
+
+| \*\*Breakout\*\*| 🔒 Planned |
+
+
+
+\## 🧠 What I Learned Building This
+
+
 
 Instead of just following a tutorial, I wanted to build this to truly understand core computer science and web development concepts. Through this project, I learned how to:
 
@@ -36,5 +50,10 @@ If you want to download and run the code on your own machine, you don't need any
 # Clone this repository
 git clone https://github.com/i-jsk/Retro-Web-Arcade.git
 cd Retro-Web-Arcade
-# Open index.html in your browser after creating a local server:
-python3 -m http.server 8181
+
+
+
+\# Open index.html in your browser, or start a local server:
+
+python3 -m http.server 8080
+
