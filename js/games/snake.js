@@ -9,6 +9,7 @@ import { GameLoop } from '../engine/gameLoop.js';
 import { Input } from '../engine/input.js';
 import { getHighScore, setHighScore } from '../engine/scoreboard.js';
 import { createDPad } from '../engine/dpad.js';
+import { createJoystick } from '../engine/joystick.js';
 
 // ---------- Setup ----------
 
@@ -16,6 +17,7 @@ const GAME_NAME = 'snake';
 const GRID_SIZE = 20;           // 20x20 grid
 const CELL_SIZE = 400 / GRID_SIZE; // canvas is 400x400, so each cell is 20px
 const MOVE_INTERVAL = 0.12;     // seconds between moves (controls snake speed)
+const CONTROL_PREFERENCE_KEY = 'retro-arcade-control-mode';
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -27,7 +29,39 @@ const overlayMessage = document.getElementById('overlay-message');
 const startButton = document.getElementById('start-button');
 
 const input = new Input();
-createDPad(input, document.getElementById('dpad-wrap'));
+
+// ---------- Touch control mode (D-pad vs Joystick) ----------
+// Both controls are created once (each renders nothing on non-touch
+// devices — see createDPad/createJoystick's internal guard), and CSS
+// display:none is used to switch between them. We don't recreate the
+// DOM each time the user toggles; we just show/hide it, which is
+// simpler and avoids re-registering touch listeners repeatedly.
+
+const dpadWrap = document.getElementById('dpad-wrap');
+const joystickWrap = document.getElementById('joystick-wrap');
+const controlToggle = document.getElementById('control-toggle');
+
+createDPad(input, dpadWrap);
+createJoystick(input, joystickWrap);
+
+function setControlMode(mode) {
+  const isDpad = mode === 'dpad';
+  dpadWrap.style.display = isDpad ? 'flex' : 'none';
+  joystickWrap.style.display = isDpad ? 'none' : 'flex';
+
+  controlToggle.querySelectorAll('.control-toggle__btn').forEach((btn) => {
+    btn.classList.toggle('control-toggle__btn--active', btn.dataset.control === mode);
+  });
+
+  localStorage.setItem(CONTROL_PREFERENCE_KEY, mode);
+}
+
+controlToggle.querySelectorAll('.control-toggle__btn').forEach((btn) => {
+  btn.addEventListener('click', () => setControlMode(btn.dataset.control));
+});
+
+// Default to D-pad, or whatever the user picked last time they played
+setControlMode(localStorage.getItem(CONTROL_PREFERENCE_KEY) || 'dpad');
 
 // ---------- Game state ----------
 // We keep all mutable state in one plain object.
@@ -101,12 +135,10 @@ function update(dt) {
     y: head.y + state.direction.y,
   };
 
-  // Collision: walls
   const hitWall =
     newHead.x < 0 || newHead.x >= GRID_SIZE ||
     newHead.y < 0 || newHead.y >= GRID_SIZE;
 
-  // Collision: self (check against every existing body segment)
   const hitSelf = state.snake.some(
     (seg) => seg.x === newHead.x && seg.y === newHead.y
   );
@@ -116,7 +148,7 @@ function update(dt) {
     return;
   }
 
-  state.snake.unshift(newHead); // grow at the head
+  state.snake.unshift(newHead);
 
   const ateFood = newHead.x === state.food.x && newHead.y === state.food.y;
   if (ateFood) {
@@ -124,7 +156,7 @@ function update(dt) {
     state.food = spawnFood(state.snake);
     scoreEl.textContent = state.score;
   } else {
-    state.snake.pop(); // remove tail so the snake doesn't grow forever
+    state.snake.pop();
   }
 }
 
@@ -143,7 +175,6 @@ function endGame() {
 // ---------- Render (drawing, runs every frame) ----------
 
 function render() {
-  // Clear the canvas each frame before redrawing
   ctx.fillStyle = '#0a0e14';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -164,7 +195,7 @@ function drawSnake() {
       CELL_SIZE - 2
     );
   });
-  ctx.shadowBlur = 0; // reset so it doesn't bleed into other draws
+  ctx.shadowBlur = 0;
 }
 
 function drawFood() {
@@ -197,5 +228,4 @@ function startGame() {
 
 startButton.addEventListener('click', startGame);
 
-// Show current high score immediately, even before first play
 highScoreEl.textContent = getHighScore(GAME_NAME);

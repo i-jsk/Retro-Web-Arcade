@@ -176,3 +176,82 @@
   display: flex;
   justify-content: center;
 }
+
+.joystick-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- On-screen Joystick (touch devices only) ---------- */
+
+.joystick {
+  display: flex;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+}
+
+.joystick__base {
+  position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-amber-dim);
+}
+
+.joystick__thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin: -1.5rem 0 0 -1.5rem; /* centers the thumb regardless of its size */
+  border-radius: 50%;
+  background: var(--color-amber);
+  box-shadow: 0 0 12px rgba(255, 176, 0, 0.5);
+  /* transform is set dynamically in JS as the user drags;
+     the transition below only smooths the SNAP BACK to center
+     on release (a live drag shouldn't feel laggy, so JS updates
+     during drag skip this transition via an inline style override) */
+  transition: transform 0.15s ease-out;
+}
+
+/* ---------- Control mode toggle (D-pad vs Joystick) ---------- */
+
+.control-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.control-toggle__btn {
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-dim);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-amber-dim);
+  border-radius: 4px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.control-toggle__btn:hover,
+.control-toggle__btn:focus-visible {
+  color: var(--color-amber);
+  outline: none;
+}
+
+.control-toggle__btn--active {
+  color: var(--color-bg);
+  background: var(--color-amber);
+  border-color: var(--color-amber);
+}
+
+.controls-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
